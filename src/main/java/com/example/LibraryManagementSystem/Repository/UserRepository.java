@@ -22,4 +22,9 @@ public class UserRepository {
         return jdbcTemplate.queryForObject("SELECT id, name, cardNumber FROM users WHERE id=?",
                 BeanPropertyRowMapper.newInstance(User.class), id);
     }
+
+    public String add(User user){
+        jdbcTemplate.update("INSERT INTO users (name, cardNumber) VALUES (?, ?)", user.getName(), user.getCardNumber());
+        return "Succeed";
+    }
 }
