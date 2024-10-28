@@ -24,8 +24,18 @@ public class BookRepository {
                 BeanPropertyRowMapper.newInstance(Book.class), id);
     }
 
-    public String save(Book book) {
+    public String addBook(Book book) {
         jdbcTemplate.update("INSERT INTO books(title, author) VALUES(?, ?)",book.getTitle(), book.getAuthor());
         return "Succeed";
+    }
+
+    public String updateBook(Book book){
+        jdbcTemplate.update("UPDATE books SET title=?, auhtor=? WHERE id=?", book.getTitle(), book.getAuthor(), book.getId());
+        return "Update succeed";
+    }
+
+    public String deleteBook(int id){
+        jdbcTemplate.update("DELETE FROM books WHERE id=?", id);
+        return "Book deleted";
     }
 }

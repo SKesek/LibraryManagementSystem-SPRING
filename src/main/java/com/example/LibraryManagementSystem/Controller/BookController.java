@@ -25,8 +25,43 @@ public class BookController {
     }
 
     @PostMapping("")
-    public String add(@RequestBody Book book){
-        return bookRepository.save(book);
+    public String addBook(@RequestBody Book book){
+        return bookRepository.addBook(book);
 
     }
+
+    @PutMapping("/{id}")
+    public String updateBook(@PathVariable("id") int id, @RequestBody Book updatedBook){
+        Book book = bookRepository.getById(id);
+        if(book != null){
+            book.setTitle(updatedBook.getTitle());
+            book.setAuthor(updatedBook.getAuthor());
+            return bookRepository.updateBook(book);
+        } else{
+            return "Something wrong";
+        }
+    }
+
+    @PatchMapping("{id}")
+        public String partiallyUpdate(@PathVariable("id") int id, @RequestBody Book updatedBook) {
+        Book book = bookRepository.getById(id);
+        if (book != null) {
+            if (updatedBook.getTitle() != null) {
+                book.setTitle(updatedBook.getTitle());
+            }
+            if (updatedBook.getAuthor() != null) {
+                book.setAuthor(updatedBook.getAuthor());
+            }
+
+            return bookRepository.updateBook(book);
+        } else {
+            return "Something wrong";
+        }
+    }
+
+    @DeleteMapping("{id}")
+    public String deleteBook(@PathVariable("id") int id){
+        return bookRepository.deleteBook(id);
+    }
+
 }

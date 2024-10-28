@@ -23,8 +23,18 @@ public class UserRepository {
                 BeanPropertyRowMapper.newInstance(User.class), id);
     }
 
-    public String add(User user){
+    public String addUser(User user){
         jdbcTemplate.update("INSERT INTO users (name, cardNumber) VALUES (?, ?)", user.getName(), user.getCardNumber());
         return "Succeed";
+    }
+
+    public String updateUser(int id){
+        jdbcTemplate.update("UPDATE name, cardNumber FROM users WHERE id=?", id);
+        return "Succeed";
+    }
+
+    public String deleteUser(int id){
+        jdbcTemplate.update("DELETE FROM users WHERE id=?");
+        return "Deleted";
     }
 }
