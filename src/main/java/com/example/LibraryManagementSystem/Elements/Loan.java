@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Book {
-    private int id;
-    private String title;
-    private String author;
-    private int isAvailable;
-    private int user_id;
+public class Loan {
+    private Book book;
+    private User user;
 }
