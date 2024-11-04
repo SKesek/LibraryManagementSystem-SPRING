@@ -14,7 +14,7 @@ public class LoanRepository {
     JdbcTemplate jdbcTemplate;
 
     public String loanBook(Book book, User user){
-        jdbcTemplate.update("UPDATE books SET user_id=? AND isAvailable = 0  WHERE id=?", user.getId(), book.getId());
+        jdbcTemplate.update("UPDATE books SET user_id=?, isAvailable = 0  WHERE id=?", user.getId(), book.getId());
 
         return "Succeed";
     }
