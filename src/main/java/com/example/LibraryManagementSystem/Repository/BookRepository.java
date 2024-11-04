@@ -15,7 +15,7 @@ public class BookRepository {
     JdbcTemplate jdbcTemplate;
 
     public List<Book> getAll(){
-       return jdbcTemplate.query("SELECT id, title, author FROM books",
+       return jdbcTemplate.query("SELECT id, title, author, isAvailable, user_id  FROM books",
                BeanPropertyRowMapper.newInstance(Book.class));
     }
 
