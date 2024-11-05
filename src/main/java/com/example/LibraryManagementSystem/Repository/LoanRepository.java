@@ -18,16 +18,8 @@ public class LoanRepository {
 
         return "Succeed";
     }
-    public String returnBook(int bookId, int userId){
-        jdbcTemplate.update("");
+    public String returnBook(Book book){
+        jdbcTemplate.update("UPDATE books SET user_id=0, isAvailable = 1 WHERE id=?", book.getId());
         return "Succeed";
-    }
-
-    public Book test(int bookId){
-        return  jdbcTemplate.queryForObject("SELECT id, title, author FROM books WHERE id=?",
-                BeanPropertyRowMapper.newInstance(Book.class), bookId);
-        //jdbcTemplate.query("SELECT id, name, cardNumber FROM users WHERE id=?", BeanPropertyRowMapper.newInstance(User.class), userId);
-
-
     }
 }

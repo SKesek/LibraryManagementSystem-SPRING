@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/loan")
 
 public class LoanController {
     @Autowired
@@ -22,22 +21,30 @@ public class LoanController {
     @Autowired
     LoanRepository loanRepository;
 
-
-    @GetMapping ("/{bookId}")
-    public Book test(@PathVariable("bookId") int bookId){
-        return loanRepository.test(bookId);
-    }
-
-    @PatchMapping("/{bookId}/{userId}")
+    @PatchMapping("/loan/{bookId}/{userId}")
     public String loanBook(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId){
         Book book = bookRepository.getById(bookId);
         User user = userRepository.getById(userId);
+        System.out.println(book.getIsAvailable());
+
         if(book != null && user != null){
-            book.setIsAvailable(0);
-            book.setUser_id(user.getId());
-            return loanRepository.loanBook(book, user);
+            if(book.getIsAvailable() == 1){
+                book.setIsAvailable(0);
+                book.setUser_id(user.getId());
+                return loanRepository.loanBook(book, user);
+            } else{
+                return "This book is loaded";
+            }
+
         } else {
             return "Something wrong";
         }
+    }
+
+    @PatchMapping("return/{bookId}")
+    public String returnBook(@PathVariable("bookId") int bookId){
+        Book book  = bookRepository.getById(bookId);
+        loanRepository.returnBook(book);
+        return "Succeed";
     }
 }

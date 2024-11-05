@@ -20,7 +20,7 @@ public class BookRepository {
     }
 
     public Book getById(int id){
-        return  jdbcTemplate.queryForObject("SELECT id, title, author FROM books WHERE id=?",
+        return  jdbcTemplate.queryForObject("SELECT id, title, isAvailable, user_id author FROM books WHERE id=?",
                 BeanPropertyRowMapper.newInstance(Book.class), id);
     }
 
