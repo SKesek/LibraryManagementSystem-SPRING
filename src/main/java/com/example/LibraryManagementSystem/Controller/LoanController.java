@@ -3,6 +3,7 @@ package com.example.LibraryManagementSystem.Controller;
 import com.example.LibraryManagementSystem.Elements.Book;
 import com.example.LibraryManagementSystem.Elements.Loan;
 import com.example.LibraryManagementSystem.Elements.User;
+import com.example.LibraryManagementSystem.Elements.UserLoanedBook;
 import com.example.LibraryManagementSystem.Repository.BookRepository;
 import com.example.LibraryManagementSystem.Repository.LoanRepository;
 import com.example.LibraryManagementSystem.Repository.UserRepository;
@@ -22,6 +23,7 @@ public class LoanController {
 
     @Autowired
     LoanRepository loanRepository;
+
 
     @PatchMapping("/loan/{bookId}/{userId}")
     public String loanBook(@PathVariable("bookId") int bookId, @PathVariable("userId") int userId){
@@ -51,7 +53,7 @@ public class LoanController {
     }
 
     @GetMapping("loanedByUser/{userId}")
-    public List<Book> userLoanedBooks(@PathVariable("userId") int userId){
+    public List<UserLoanedBook> userLoanedBooks(@PathVariable("userId") int userId){
         User user = userRepository.getById(userId);
         return loanRepository.userLoanedBooks(user);
     }
