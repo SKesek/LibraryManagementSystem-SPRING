@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class LoanRepository {
 
@@ -21,5 +23,10 @@ public class LoanRepository {
     public String returnBook(Book book){
         jdbcTemplate.update("UPDATE books SET user_id=0, isAvailable = 1 WHERE id=?", book.getId());
         return "Succeed";
+    }
+
+    public List<Book> userLoanedBooks (User user){
+        return jdbcTemplate.query("SELECT books.id, books.title, users.name, users.cardNumber  FROM books, users WHERE books.user_id=? AND users.id=?",
+                BeanPropertyRowMapper.newInstance(Book.class), user.getId(), user.getId());
     }
 }

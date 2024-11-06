@@ -9,6 +9,8 @@ import com.example.LibraryManagementSystem.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 
 public class LoanController {
@@ -46,5 +48,11 @@ public class LoanController {
         Book book  = bookRepository.getById(bookId);
         loanRepository.returnBook(book);
         return "Succeed";
+    }
+
+    @GetMapping("loanedByUser/{userId}")
+    public List<Book> userLoanedBooks(@PathVariable("userId") int userId){
+        User user = userRepository.getById(userId);
+        return loanRepository.userLoanedBooks(user);
     }
 }
