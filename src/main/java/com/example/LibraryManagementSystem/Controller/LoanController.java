@@ -52,7 +52,7 @@ public class LoanController {
         return "Succeed";
     }
 
-    @GetMapping("loanedByUser/{userId}")
+    @GetMapping("userLoanedBooks/{userId}")
     public List<UserLoanedBook> userLoanedBooks(@PathVariable("userId") int userId){
         User user = userRepository.getById(userId);
         return loanRepository.userLoanedBooks(user);
