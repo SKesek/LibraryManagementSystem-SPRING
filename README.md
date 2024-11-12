@@ -26,14 +26,12 @@
   | PUT         | /users/{id}        | Update user for a given ID                  |
   | PATCH       | /users/{id}        | Update partially user for a given ID        |
   | DELETE      | /users/{id}        | Delete user for a given ID                  |
-  
   | GET         | /books             | Show all books                              |
   | GET         | /books/{id}        | Show book for a given ID                    |
   | POST        | /books             | Add new book                                |
   | PUT         | /books/{id}        | Update book for a given ID                  |
   | PATCH       | /books/{id}        | Update partially book for a given ID        |
   | DELETE      | /books/{id}        | Delete book for a given ID                  |
-
   | PATCH       | /loan/{bookId}/{userId}  | Loan a book for given ID by user for given ID |
   | PATCH       | /return/{bookId}         | Return book for given ID                      |
   | DELETE      | /userLoanedBooks/{userId}| Show loaned books by user for given ID        |
