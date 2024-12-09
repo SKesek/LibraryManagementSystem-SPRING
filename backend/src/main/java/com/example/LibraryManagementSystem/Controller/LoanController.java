@@ -16,14 +16,18 @@ import java.util.List;
 @RequestMapping("/api")
 
 public class LoanController {
-    @Autowired
+
     BookRepository bookRepository;
-
-    @Autowired
     UserRepository userRepository;
+    LoanRepository loanRepository;
+
+    public LoanController(BookRepository bookRepository, UserRepository userRepository, LoanRepository loanRepository) {
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
+        this.loanRepository = loanRepository;
+    }
 
     @Autowired
-    LoanRepository loanRepository;
 
 
     @PatchMapping("/loan/{bookId}/{userId}")
